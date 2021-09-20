@@ -4,42 +4,18 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class Ui {
-  static GetBar SuccessSnackBar({String title = 'Success', String message}) {
-    Get.log("[$title] $message");
-    return GetBar(
-      titleText: Text(title.tr,
-          style: Get.textTheme.headline6
-              .merge(TextStyle(color: Get.theme.primaryColor))),
-      messageText: Text(message,
-          style: Get.textTheme.caption
-              .merge(TextStyle(color: Get.theme.primaryColor))),
-      snackPosition: SnackPosition.BOTTOM,
-      margin: EdgeInsets.all(20),
-      backgroundColor: Get.theme.accentColor,
-      icon: Icon(Icons.check_circle_outline,
-          size: 32, color: Get.theme.primaryColor),
-      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 18),
-      borderRadius: 8,
-      dismissDirection: SnackDismissDirection.HORIZONTAL,
-      duration: Duration(seconds: 5),
-    );
-  }
-
   static GetBar ErrorSnackBar(
       {String title = 'Something went wrong.', String message}) {
     Get.log("[$title] $message", isError: true);
     return GetBar(
       titleText: Text(title.tr,
-          style: Get.textTheme.headline6
-              .merge(TextStyle(color: Get.theme.primaryColor))),
-      messageText: Text("Please check your internet connection!", //message,
-          style: Get.textTheme.caption
-              .merge(TextStyle(color: Get.theme.primaryColor))),
+          style: Get.textTheme.headline6.merge(TextStyle(color: Colors.white))),
+      messageText: Text(message.tr, //message,
+          style: Get.textTheme.caption.merge(TextStyle(color: Colors.white))),
       snackPosition: SnackPosition.BOTTOM,
       margin: EdgeInsets.all(20),
       backgroundColor: Colors.redAccent,
-      icon: Icon(Icons.remove_circle_outline,
-          size: 32, color: Get.theme.primaryColor),
+      icon: Icon(Icons.remove_circle_outline, size: 32, color: Colors.white),
       padding: EdgeInsets.symmetric(horizontal: 20, vertical: 18),
       borderRadius: 8,
       duration: Duration(seconds: 5),
@@ -88,76 +64,4 @@ class Ui {
       errorText: errorText,
     );
   }
-
-  // static BoxFit getBoxFit(String boxFit) {
-  //   switch (boxFit) {
-  //     case 'cover':
-  //       return BoxFit.cover;
-  //     case 'fill':
-  //       return BoxFit.fill;
-  //     case 'contain':
-  //       return BoxFit.contain;
-  //     case 'fit_height':
-  //       return BoxFit.fitHeight;
-  //     case 'fit_width':
-  //       return BoxFit.fitWidth;
-  //     case 'none':
-  //       return BoxFit.none;
-  //     case 'scale_down':
-  //       return BoxFit.scaleDown;
-  //     default:
-  //       return BoxFit.cover;
-  //   }
-  // }
-  //
-  // static AlignmentDirectional getAlignmentDirectional(
-  //     String alignmentDirectional) {
-  //   switch (alignmentDirectional) {
-  //     case 'top_start':
-  //       return AlignmentDirectional.topStart;
-  //     case 'top_center':
-  //       return AlignmentDirectional.topCenter;
-  //     case 'top_end':
-  //       return AlignmentDirectional.topEnd;
-  //     case 'center_start':
-  //       return AlignmentDirectional.centerStart;
-  //     case 'center':
-  //       return AlignmentDirectional.topCenter;
-  //     case 'center_end':
-  //       return AlignmentDirectional.centerEnd;
-  //     case 'bottom_start':
-  //       return AlignmentDirectional.bottomStart;
-  //     case 'bottom_center':
-  //       return AlignmentDirectional.bottomCenter;
-  //     case 'bottom_end':
-  //       return AlignmentDirectional.bottomEnd;
-  //     default:
-  //       return AlignmentDirectional.bottomEnd;
-  //   }
-  // }
-  //
-  // static CrossAxisAlignment getCrossAxisAlignment(String textPosition) {
-  //   switch (textPosition) {
-  //     case 'top_start':
-  //       return CrossAxisAlignment.start;
-  //     case 'top_center':
-  //       return CrossAxisAlignment.center;
-  //     case 'top_end':
-  //       return CrossAxisAlignment.end;
-  //     case 'center_start':
-  //       return CrossAxisAlignment.center;
-  //     case 'center':
-  //       return CrossAxisAlignment.center;
-  //     case 'center_end':
-  //       return CrossAxisAlignment.center;
-  //     case 'bottom_start':
-  //       return CrossAxisAlignment.start;
-  //     case 'bottom_center':
-  //       return CrossAxisAlignment.center;
-  //     case 'bottom_end':
-  //       return CrossAxisAlignment.end;
-  //     default:
-  //       return CrossAxisAlignment.start;
-  //   }
-  // }
 }

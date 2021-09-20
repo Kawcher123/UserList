@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:user_login/common_widgets/customLoader.dart';
 import 'package:user_login/main.dart';
+import 'package:user_login/views/home_view/home_view.dart';
 import 'package:user_login/views/login_view/login_view.dart';
 
 class SplashView extends StatefulWidget {
@@ -57,12 +58,11 @@ class _SplashViewState extends State<SplashView>
 
   void goTo() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    bool alreadyvisited = false;
 
-    if (alreadyvisited) {
-      Get.off(MyHomePage(
-        title: 'Demo',
-      ));
+    String token = prefs.getString('TOKEN');
+
+    if (token != null) {
+      Get.off(HomeView());
     } else {
       Get.off(() => LoginView());
     }

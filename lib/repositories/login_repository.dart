@@ -4,6 +4,8 @@ import 'package:http/http.dart' as http;
 
 class LoginRepository {
   Future login(String email, String password) async {
+    print(email);
+    print(password);
     var jsonData;
     try {
       var headers = {'Content-Type': 'application/json'};
@@ -25,5 +27,7 @@ class LoginRepository {
     } catch (e) {
       throw (e).toString();
     }
+
+    return jsonData;
   }
 }

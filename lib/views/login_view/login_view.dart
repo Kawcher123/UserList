@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:user_login/common_widgets/text_field_widget.dart';
 import 'package:user_login/common_widgets/ui.dart';
 import 'package:user_login/controllers/login_controller.dart';
+import 'package:user_login/main.dart';
 
 class LoginView extends GetView<LoginController> {
-  // final Setting _settings = Get.find<SettingsService>().setting.value;
+  TextEditingController _emailController = TextEditingController();
+  TextEditingController _passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -62,9 +63,15 @@ class LoginView extends GetView<LoginController> {
                 ),
               ],
             ),
+            SizedBox(
+              height: 30,
+            ),
             Obx(() {
               if (controller.loading.isTrue)
-                return CircularProgressIndicator();
+                return Center(
+                    child: CircularProgressIndicator(
+                  backgroundColor: Colors.green.shade800,
+                ));
               else {
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -88,40 +95,69 @@ class LoginView extends GetView<LoginController> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
-                          TextFieldWidget(
-                            labelText: "Email Address".tr,
-                            hintText: "kawsar@gmail.com".tr,
-                            validator: (input) => !input.contains('@')
-                                ? "Should be a valid email".tr
-                                : null,
-                            iconData: Icons.alternate_email,
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: [
+                              Text(
+                                "Email Address".tr,
+                                style: Get.textTheme.bodyText1,
+                                textAlign: TextAlign.start,
+                              ),
+                              TextFormField(
+                                controller: _emailController,
+                                keyboardType: TextInputType.text,
+                                validator: (input) => !input.contains('@')
+                                    ? "Should be a valid email".tr
+                                    : null,
+                                style: Get.textTheme.bodyText2,
+                                obscureText: false,
+                                textAlign: TextAlign.start,
+                                decoration: Ui.getInputDecoration(
+                                  hintText: "kawsar@gmail.com".tr,
+                                  iconData: Icons.alternate_email,
+                                ),
+                              ),
+                            ],
                           ),
                           Obx(() {
-                            return TextFieldWidget(
-                              labelText: "Password".tr,
-                              hintText: "••••••••••••".tr,
-                              validator: (input) => input.length < 6
-                                  ? "Should be more than 6 characters".tr
-                                  : null,
-                              obscureText: controller.hidePassword.value,
-                              iconData: Icons.lock_outline,
-                              keyboardType: TextInputType.visiblePassword,
-                              suffixIcon: IconButton(
-                                onPressed: () {
-                                  controller.hidePassword.value =
-                                      !controller.hidePassword.value;
-                                },
-                                color: Colors.green.shade800,
-                                icon: Icon(controller.hidePassword.value
-                                    ? Icons.visibility_outlined
-                                    : Icons.visibility_off_outlined),
-                              ),
+                            return Column(
+                              crossAxisAlignment: CrossAxisAlignment.stretch,
+                              children: [
+                                Text(
+                                  "Password".tr,
+                                  style: Get.textTheme.bodyText1,
+                                  textAlign: TextAlign.start,
+                                ),
+                                TextFormField(
+                                  controller: _passwordController,
+                                  keyboardType: TextInputType.visiblePassword,
+                                  validator: (input) => input.length < 6
+                                      ? "Should be more than 6 characters".tr
+                                      : null,
+                                  style: Get.textTheme.bodyText2,
+                                  obscureText: controller.hidePassword.value,
+                                  textAlign: TextAlign.start,
+                                  decoration: Ui.getInputDecoration(
+                                    hintText: "••••••••••••".tr,
+                                    iconData: Icons.lock_outline,
+                                    suffixIcon: IconButton(
+                                      onPressed: () {
+                                        controller.hidePassword.value =
+                                            !controller.hidePassword.value;
+                                      },
+                                      color: Colors.green.shade800,
+                                      icon: Icon(controller.hidePassword.value
+                                          ? Icons.visibility_outlined
+                                          : Icons.visibility_off_outlined),
+                                    ),
+                                  ),
+                                ),
+                              ],
                             );
                           }),
                         ],
                       ),
                     ),
-
                     Padding(
                       padding: const EdgeInsets.symmetric(
                           horizontal: 20, vertical: 10),
@@ -137,6 +173,9 @@ class LoginView extends GetView<LoginController> {
                             if (controller.loginFormKey.currentState
                                 .validate()) {
                               print('validate');
+
+                              controller.loginController(_emailController.text,
+                                  _passwordController.text);
                             }
                           },
                           child: Text(
@@ -150,41 +189,6 @@ class LoginView extends GetView<LoginController> {
                         ),
                       ),
                     ),
-
-                    // Padding(
-                    //   padding: const EdgeInsets.symmetric(
-                    //       vertical: 10, horizontal: 20),
-                    //   child: Container(
-                    //     decoration: BoxDecoration(boxShadow: [
-                    //       BoxShadow(
-                    //           color: Colors.green.shade800.withOpacity(0.3),
-                    //           blurRadius: 40,
-                    //           offset: Offset(0, 15)),
-                    //       BoxShadow(
-                    //           color: Colors.green.shade800.withOpacity(0.2),
-                    //           blurRadius: 13,
-                    //           offset: Offset(0, 3))
-                    //     ], color: Colors.green.shade800
-                    //         // borderRadius: BorderRadius.all(Radius.circular(20)),
-                    //         ),
-                    //     child: MaterialButton(
-                    //       //  onPressed: this.onPressed,
-                    //       padding:
-                    //           EdgeInsets.symmetric(horizontal: 8, vertical: 12),
-                    //       color: Colors.green.shade800,
-                    //       disabledElevation: 0,
-                    //       disabledColor: Get.theme.focusColor,
-                    //       shape: RoundedRectangleBorder(
-                    //           borderRadius: BorderRadius.circular(10)),
-                    //       child: Text(
-                    //         "Login".tr,
-                    //         style: Get.textTheme.headline6.merge(
-                    //             TextStyle(color: Get.theme.primaryColor)),
-                    //       ),
-                    //       elevation: 0,
-                    //     ),
-                    //   ),
-                    // )
                   ],
                 );
               }

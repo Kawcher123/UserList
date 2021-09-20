@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:user_login/bindings/all_controller_binding.dart';
 import 'package:user_login/views/splash_view.dart';
 
-void main() {
+void main() async {
   AllControllerBinding().dependencies();
   runApp(MyApp());
 }
