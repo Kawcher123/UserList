@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:user_login/common_widgets/customLoader.dart';
 import 'package:user_login/common_widgets/logout.dart';
 import 'package:user_login/common_widgets/ui.dart';
 import 'package:user_login/controllers/user_profile_controller.dart';
@@ -13,10 +14,7 @@ class UserProfile extends GetView<UserProfileController> {
     return Scaffold(
       body: Obx(() {
         if (controller.userDataLoaded.value == false) {
-          return Center(
-              child: CircularProgressIndicator(
-            backgroundColor: Colors.green.shade800,
-          ));
+          return Center(child: Loader().customLoader());
         } else {
           return ListView(
             primary: true,

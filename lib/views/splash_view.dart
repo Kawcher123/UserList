@@ -48,7 +48,7 @@ class _SplashViewState extends State<SplashView>
               bottom: 10,
               right: 0,
               left: 0,
-              child: Loader().customLoader(context),
+              child: Loader().customLoader(),
             )
           ],
         ),

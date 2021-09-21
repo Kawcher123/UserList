@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:user_login/common_widgets/customLoader.dart';
 import 'package:user_login/common_widgets/ui.dart';
 import 'package:user_login/controllers/login_controller.dart';
 import 'package:user_login/main.dart';
@@ -68,10 +69,7 @@ class LoginView extends GetView<LoginController> {
             ),
             Obx(() {
               if (controller.loading.isTrue)
-                return Center(
-                    child: CircularProgressIndicator(
-                  backgroundColor: Colors.green.shade800,
-                ));
+                return Center(child: Loader().customLoader());
               else {
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,

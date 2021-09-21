@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class Loader {
-  customLoader(BuildContext context) {
+  customLoader() {
     return SpinKitThreeInOut(
       itemBuilder: (BuildContext context, int index) {
         return DecoratedBox(
